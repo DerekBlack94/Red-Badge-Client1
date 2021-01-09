@@ -1,48 +1,62 @@
-import React, {Component} from 'react';
-import { Button, TextField} from '@material-ui/core';
+import React, { Component } from 'react';
+import { TextField, Button } from '@material-ui/core';
 
-
-interface Props {
-    updateToken: (newToken: string, userId: number, role: 'user' | 'admin') => void;
-}
-interface State {
+type LoginState = {
     email: string,
     password: string
 }
 
-class Login extends Component<Props, State> {
+interface Props {
+    updateToken(newToken: string, userId: number, role: 'user' | 'admin'): void,
+}
+
+export default class LoginIndex extends Component<Props, LoginState>{
     constructor(props: any){
         super(props)
-        this.state=({
+        this.state ={
             email: '',
             password: ''
-        });
+        }
     }
-    handleSubmit = (event: any) => {
-        event.preventDefault();
-        fetch('http//localhost:3000/user/login', {
-            method: "POST",
-            body: JSON.stringify({email: this.state.email, password: this.state.password}),
+
+    setUserName(e:any){
+        this.setState({
+            email: (e)
+        })
+    }
+
+    setPassword(e: any){
+        this.setState({
+            password: (e)
+        })
+    }
+
+    loginUser(e: any){
+        e.preventDefault();
+        fetch('http://localhost:3000/user/login', {
+            method: 'POST',
+            body: JSON.stringify({
+                email: this.state.email,
+                password: this.state.password
+            }),
             headers: new Headers({
-                'Content-Type' : 'application/json'
+                'Content-Type': 'application/json'
             })
-        })
-        .then((result) => result.json())
-        .then((data) => {
-            this.props.updateToken(data.sessionToken, data.userId, data.role);
-        })
+        }).then((response)=> response.json())
+            .then((data)=> {
+                this.props.updateToken(data.token, data.userId, data.role)
+            })
     }
+
     render() {
-        return(
+        return (
             <div>
-                <form onSubmit={(e) =>this.handleSubmit(e)}>
-                    <TextField id="outlined-basic" label="Email" variant="outlined" onChange={(e)=>this.setState({email: e.target.value})} />
-                    <TextField id="outlined-basic" type="password" label="Password" variant="outlined" onChange={(e)=>this.setState({password: e.target.value})} />
+                <form onSubmit={(e)=>this.loginUser(e)} >
+                    <TextField id="outlined-basic" label="email" variant="outlined" onChange={(e)=>this.setUserName(e.target.value)} />
+                    <TextField id="outlined-basic" label="Password" variant="outlined" onChange={(e)=>this.setPassword(e.target.value)} />
                     <Button type='submit' variant='contained'>LOG IN</Button>
                 </form>
-
             </div>
         )
     }
 }
-export default Login;

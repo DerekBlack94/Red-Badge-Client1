@@ -1,32 +1,78 @@
 import React from 'react'
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import Navbar from "../Navbar/Navbar";
-import SignUp from '../Auth/Signup';
-import Login from '../Auth/Login';
+import {createStyles, makeStyles} from '@material-ui/core/styles';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import NavbBar from '../Navbar/Navbar';
+import Drawer from './Drawer'
 
-type Props = {
+import Signup from '../Auth/Signup'
+import Home from './Home';
+import Login from '../Auth/Login';
+import DisplayUserBike from '../UserBikes/DisplayUserBike';
+import GetUserBike from '../UserBikes/GetUserBike';
+import DeleteUserBike from '../UserBikes/DeleteUserBike';
+import CreateAppointmentDisplay from '../Appointments/CreateAppointmentDisplay';
+import GetAppointmentDisplay from '../Appointments/GetAppointmentDisplay';
+import GetUserBikeDisplay from '../UserBikes/GetUserBikeDisplay';
+import DeleteAppointmentDisplay from '../Appointments/DeleteAppointmentDisplay';
+// import DeleteAppointment from '../Appointments/DeleteAppointment'
+import GetAppointment from '../Appointments/GetAppointment'
+import DeleteUserBikeDisplay from '../UserBikes/DeleteUserBikeDisplay'
+import UpdateUserBikeDisplay from '../UserBikes/UpdateUserBikeDisplay';
+import UpdateAppointmentDisplay from '../Appointments/UpdateAppointmentDisplay';
+
+
+const useStyles = makeStyles(()=>
+    createStyles({
+        mainDiv: {
+            backgroundColor: 'black',
+        },
+        bottomNavDiv: {
+            position: 'fixed',
+            bottom: '0',
+            width: '100%'
+        }
+    })
+)
+
+interface Props {
     updateToken(newToken: string, userId: number, role: 'user' | 'admin'): void,
-    clearToken: () => void,
-    token: string | null,
+    clearToken:() => void,
+    token: string | null
 }
 
 const Main = (props: Props) => {
+    const classes = useStyles();
+
+    const bottomNavHandle = () => {
+        return props.token === '' ? null : <Drawer />
+    }
 
     return (
-        <React.Fragment>
-            <Router>
-                <div className='head'>
-                    <Navbar clearToken={props.clearToken} />
-                    <div></div>
-                    <SignUp updateToken={props.updateToken}/>
+            <React.Fragment>
+                <Router>
+                    <div className={classes.mainDiv}>
+                     <NavbBar updateToken={props.updateToken} clearToken={props.clearToken} />
                     <Switch>
-                        <Route exact path='/navbar' render={()=>(<Navbar clearToken={props.clearToken}/>)} />
-                        <Route exact path='/signup' render={()=> (<SignUp updateToken={props.updateToken}/>)}/>
-                        <Route exact path='/login' render={()=> (<Login updateToken={props.updateToken}/>)}/>
+                        <Route exact path='/home' render={()=>(<Home />)} />
+                        <Route exact path='/signup' render={()=>(<Signup updateToken={props.updateToken} />)} />
+                        <Route exact path='/login' render={()=>(<Login updateToken={props.updateToken} />)} />
+                        <Route exact path='/createbike' render={()=>(<DisplayUserBike token={props.token} />)} />
+                        <Route exact path='/getbike' render={()=>(<GetUserBike token={props.token} />)} />
+                        <Route exact path='/deleteuserbike' render={()=>(<DeleteUserBikeDisplay token={props.token} />)} />
+                        <Route exact path='/createapp' render={()=>(<CreateAppointmentDisplay token={props.token} />)} />
+                        <Route exact path='/getapp' render={()=>(<GetAppointment token={props.token} />)} />
+                        <Route exact path='/getbike' render={()=>(<GetUserBikeDisplay token={props.token} />)} />
+                        <Route exact path='/deleteapp' render={()=>(<DeleteAppointmentDisplay token={props.token} />)} />
+                        <Route exact path='/updatebike' render={()=>(<UpdateUserBikeDisplay token={props.token} />)} />
+                        <Route exact path='/updateapp' render={()=>(<UpdateAppointmentDisplay token={props.token} />)} />
                     </Switch>
-                </div>
-            </Router>
-        </React.Fragment>
+                    <div className={classes.bottomNavDiv}>
+                        {bottomNavHandle()}
+                    </div>
+                    </div>
+                </Router>
+            </React.Fragment>
     )
 }
+
 export default Main;
