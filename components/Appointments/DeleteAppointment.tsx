@@ -16,6 +16,7 @@ interface Props {
 
 interface State {
     appointment: any;
+    // userbike:string;
 //         savedDate: string;
 //         userInput: string;
 //         id: number} |null;
@@ -27,6 +28,7 @@ class DeleteAppointment extends Component<Props, State>{
         super(props);
         this.state = {
             appointment: null,
+            // userbike: "0"
         }
     }
 
@@ -49,7 +51,7 @@ deleteUserBike() {
         console.log("response", data);
       });
   }
-
+  
   componentDidMount() {
     this.deleteUserBike();
     console.log('User Bikes' , this.state.appointment)

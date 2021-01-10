@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, MouseEvent } from "react";
 import { createStyles, withStyles } from "@material-ui/core/styles";
 import {
   TextField,
@@ -9,16 +9,16 @@ import {
   Select,
 } from "@material-ui/core";
 
-const styles = (theme: any) =>
-  createStyles({
-    formControl: {
-      margin: theme.spacing(1),
-      minWidth: 120,
-    },
-    selectEmpty: {
-      marginTop: theme.spacing(2),
-    },
-  });
+// const styles = (theme: {}) =>
+//   createStyles({
+//     formControl: {
+//       margin: theme.spacing(1),
+//       minWidth: 120,
+//     },
+//     selectEmpty: {
+//       marginTop: theme.spacing(2),
+//     },
+//   });
 
 interface State {
  savedDate: string,
@@ -28,12 +28,12 @@ interface State {
 
 interface Props {
   token: string | null;
-  classes: any;
+  // classes: any;
   // bike: any
 }
 
 class CreateAppointment extends Component<Props, State> {
-  constructor(props: any) {
+  constructor(props: Props) {
     super(props);
     this.state = {
       savedDate: "",
@@ -42,13 +42,13 @@ class CreateAppointment extends Component<Props, State> {
     };
   }
 
-  setDate(e: any) {
+  setDate(e: string) {
     this.setState({
       savedDate: (e),
     });
   }
 
-  setUserInput(e: any) {
+  setUserInput(e: string) {
     this.setState({
       userInput: (e),
     });
@@ -60,7 +60,7 @@ class CreateAppointment extends Component<Props, State> {
   //     console.log('user ID: ', )
   // }
   
-  createAppointment(e: any) {
+  createAppointment(e: MouseEvent<HTMLButtonElement | HTMLAnchorElement>) {
     e.preventDefault();
     fetch("http://localhost:3000/appointments/create", {
       method: "POST",
@@ -84,10 +84,10 @@ class CreateAppointment extends Component<Props, State> {
   }
 
   render() {
-    const { classes } = this.props;
+    // const { classes } = this.props;
     return (
       <div>
-        <form onSubmit={(e)=>this.createAppointment(e)}>
+        {/* <form onSubmit={(e)=>this.createAppointment(e)}> */}
           <TextField
             id="outlined-basic"
             label="Appointment Time"
@@ -101,11 +101,12 @@ class CreateAppointment extends Component<Props, State> {
             onChange={(e) => this.setUserInput(e.target.value)}
           />
          
-          <Button type='submit' variant='contained' >Schedule Appointment</Button>
-        </form>
+          <Button onClick={(e)=>this.createAppointment(e)} type='submit' variant='contained' >Schedule Appointment</Button>
+        {/* </form> */}
       </div>
     );
   }
 }
 
-export default withStyles(styles)(CreateAppointment);
+// export default withStyles(styles)(CreateAppointment);
+export default CreateAppointment

@@ -1,38 +1,6 @@
-// import React, { Component } from 'react';
-import { BottomNavigation, BottomNavigationAction } from '@material-ui/core';
+
+
 import { AddCircleOutline, MenuBook, Person } from '@material-ui/icons';
-// import { Link } from 'react-router-dom';
-
-// class sideDrawer extends Component {
-//     state = {
-//         value: 0
-//     }
-
-//     handleChange = (e: any, value: any) => {
-//         this.setState({ value });
-//     }
-
-//     render() {
-//         const { value } = this.state;
-
-//         return (
-//             <BottomNavigation value={value} onChange={this.handleChange}>
-//                 <Link to='/createbike'>
-//                     <BottomNavigationAction label='Tell Us About Your Bike' showLabel icon={<AddCircleOutline />} />
-//                 </Link>
-//                 <Link to='/getbike'>
-//                     <BottomNavigationAction label='Your Bikes' showLabel icon={<MenuBook />} />
-//                 </Link>
-//                 <Link to='/deletebikes'>
-//                     <BottomNavigationAction label='A New Problem With Your Bike?' showLabel icon={<Person />} />
-//                 </Link>
-//             </BottomNavigation>
-//         )
-//     }
-// }
-
-// export default sideDrawer;
-
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
@@ -46,6 +14,10 @@ import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
 import { Link } from 'react-router-dom';
+import HomeSharpIcon from '@material-ui/icons/HomeSharp';
+import DirectionsBikeSharpIcon from '@material-ui/icons/DirectionsBikeSharp';
+import AddSharpIcon from '@material-ui/icons/AddSharp';
+import MenuSharpIcon from '@material-ui/icons/MenuSharp';
 
 const styles = {
   list: {
@@ -62,8 +34,7 @@ interface Props {
 }
 
 interface State {
-    // side: any,
-    // classes: any
+    //
 }
 
 class sideDrawer extends React.Component<Props,State> {
@@ -89,37 +60,55 @@ class sideDrawer extends React.Component<Props,State> {
       [side]: open,
     });
   };
-
+  
   render() {
     const { classes } = this.state;
 
     const sideList = (
       <div className={classes.list}>
         <List>
-          <Link to="/signup">signup</Link>
-        <Link to='/createbike'>Your Bike</Link>
-        {/* <Link to="/getbike">Get Your Bikes</Link> */}
-        <Link to="/createapp">Create an App</Link>
-        {/* <Link to='/deletebikes'>Edit Bike</Link> */}
-          {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-              <ListItemText primary={text} />
+          <ListItem>
+            <ListItemIcon><HomeSharpIcon></HomeSharpIcon></ListItemIcon>
+            <Link to="/home"><Button>Home</Button></Link>
+          </ListItem>
+          
+            <ListItem >
+              <ListItemIcon><MailIcon /></ListItemIcon>
+        <Link to="/createbike"><Button>New Bike</Button></Link>
             </ListItem>
-          ))}
+            <ListItem>
+              <ListItemIcon><DirectionsBikeSharpIcon></DirectionsBikeSharpIcon></ListItemIcon>
+              <Link to='/getbike'><Button>Your Bikes</Button></Link>
+            </ListItem>
+            <ListItem>
+              <ListItemIcon><DirectionsBikeSharpIcon></DirectionsBikeSharpIcon></ListItemIcon>
+              <Link to='/deleteuserbike'><Button>Delete Your Bike</Button></Link>
+            </ListItem>
+            <ListItem>
+              <ListItemIcon><DirectionsBikeSharpIcon></DirectionsBikeSharpIcon></ListItemIcon>
+              <Link to='/updatebike'><Button>Update Your Bikes</Button></Link>
+            </ListItem>
         </List>
         <Divider />
         <List>
-          {['All mail', 'Trash', 'Spam'].map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-              <ListItemText primary={text} />
-              <Link to='/creatbike'>
-              <BottomNavigationAction label='Tell Us About Your Bike' showLabel icon={<AddCircleOutline />} />
-                
-              </Link>
+        
+            <ListItem >
+              <ListItemIcon><AddSharpIcon></AddSharpIcon></ListItemIcon>
+              <Link to='/createapp'><Button>Schduel Appointment</Button></Link>
             </ListItem>
-          ))}
+            <ListItem >
+              <ListItemIcon><AddSharpIcon></AddSharpIcon></ListItemIcon>
+              <Link to='/getapp'><Button>Your Appointments</Button></Link>
+            </ListItem>
+            <ListItem >
+              <ListItemIcon><AddSharpIcon></AddSharpIcon></ListItemIcon>
+              <Link to='/updateapp'><Button>Change Your Appointment</Button></Link>
+            </ListItem>
+            <ListItem >
+              <ListItemIcon><AddSharpIcon></AddSharpIcon></ListItemIcon>
+              <Link to='/deleteapp'><Button>Delete Appointmnets</Button></Link>
+            </ListItem>
+        
         </List>
       </div>
     );
@@ -148,10 +137,10 @@ class sideDrawer extends React.Component<Props,State> {
 
     return (
       <div>
-        <Button onClick={this.toggleDrawer('left', true)}>Open Left</Button>
-        <Button onClick={this.toggleDrawer('right', true)}>Open Right</Button>
+        <Button onClick={this.toggleDrawer('left', true)}><MenuSharpIcon></MenuSharpIcon></Button>
+        {/* <Button onClick={this.toggleDrawer('right', true)}>Open Right</Button>
         <Button onClick={this.toggleDrawer('top', true)}>Open Top</Button>
-        <Button onClick={this.toggleDrawer('bottom', true)}>Open Bottom</Button>
+        <Button onClick={this.toggleDrawer('bottom', true)}>Open Bottom</Button> */}
         <Drawer open={this.state.left} onClose={this.toggleDrawer('left', false)}>
           <div
             tabIndex={0}

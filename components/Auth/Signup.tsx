@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, MouseEvent } from 'react';
 import { TextField, Button} from '@material-ui/core';
 
 type SignUpState = {
@@ -13,7 +13,7 @@ interface Props {
 }
 
 export default class Signup extends Component<Props, SignUpState>{
-    constructor(props: any) {
+    constructor(props: Props) {
         super(props)
         this.state = {
             firstName: '',
@@ -21,17 +21,17 @@ export default class Signup extends Component<Props, SignUpState>{
             email: '',
             password: '',
         }
-        // this.updateToken = this.props.updateToken.bind(this)
+        
     }
 
-    setFirstName(e: any) {
+    setFirstName(e: string) {
         this.setState({
             firstName: (e)
         })
         
     }
 
-    setLastName(e: any) {
+    setLastName(e: string) {
         this.setState({
             lastName: (e)
         })
@@ -40,21 +40,21 @@ export default class Signup extends Component<Props, SignUpState>{
 
     
 
-    setEmail(e: any) {
+    setEmail(e: string) {
         this.setState({
             email: (e)
         })
         
     }
 
-    setPassword(e: any) {
+    setPassword(e: string) {
         this.setState({
             password: (e)
         })
         // console.log('password', this.state.password)
     }
 
-    signUpUser(e: any) {
+    signUpUser(e: MouseEvent<HTMLButtonElement | HTMLAnchorElement>) {
         e.preventDefault();
         fetch('http://localhost:3000/user/register', {
             method: 'POST',
@@ -77,14 +77,14 @@ export default class Signup extends Component<Props, SignUpState>{
     render() {
         return (
             <div>
-                <form onSubmit={(e)=>this.signUpUser(e)} >
+                {/* <form onSubmit={(e)=>this.signUpUser(e)} > */}
                     <TextField id="outlined-basic" label="First Name" variant="outlined" onChange={(e)=>this.setFirstName(e.target.value)} />
                     <TextField id="outlined-basic" label="Last Name" variant="outlined"
                     onChange={(e)=>this.setLastName(e.target.value)} />
                     <TextField id="outlined-basic" label="Email" variant="outlined" onChange={(e)=>this.setEmail(e.target.value)} />
                     <TextField id="outlined-basic" label="Password" variant="outlined" onChange={(e)=>this.setPassword(e.target.value)} />
-                    <Button type='submit' variant="contained">Register</Button>
-                </form>
+                    <Button onClick={(e)=>this.signUpUser(e)} type='submit' variant="contained">Register</Button>
+                {/* </form> */}
             </div>
         )
     }

@@ -1,69 +1,38 @@
-
-
-
 import React, { Component } from "react";
 import { createStyles, withStyles } from "@material-ui/core/styles";
 import clsx from "clsx";
-import {
-  Container,
-  Card,
-  CardHeader,
-  CardMedia,
-  CardContent,
-  CardActions,
-  Collapse,
-  Avatar,
-  IconButton,
-  Typography,
-} from "@material-ui/core";
+import {Container,} from "@material-ui/core";
 import { ExpandMore } from "@material-ui/icons";
 import GetUserBikeDisplay from "./GetUserBikeDisplay";
 
-const styles = (theme: any) =>
-  createStyles({
-    container: {
-      marginTop: "5em",
-      backgroundColor: "gray",
-      display: "flex",
-      justifyContent: "center",
-      alignContent: "center",
-      height: "100%",
-    },
-    root: {
-      maxWidth: 345,
-    },
-    media: {
-      height: 0,
-      paddingTop: "56.25%",
-    },
-    expand: {
-      transform: "rotate(0deg)",
-      marginLeft: "auto",
-      transition: theme.transitions.create("transform", {
-        duration: theme.transitions.duration.shortest,
-      }),
-    },
-    expandOpen: {
-      transform: "rotate(180deg)",
-    },
-  });
+
 
 interface State {
-  userbike: any;
-  expanded: boolean;
+  userbike: Array<userBikeInterface>;
+ 
 };
 
 interface Props {
   token: string | null;
-  classes: any;
+  // classes: any;
+}
+interface userBikeInterface {
+  make: string,
+  model: string,
+  year: string;
+  color: string;
+  size: string;
+  tireSize: string;
+  userInput: string;
+  id: number;
 }
 
 class GetUserBike extends Component<Props, State> {
-  constructor(props: any) {
+  constructor(props: Props) {
     super(props);
     this.state = {
       userbike: [],
-      expanded: false,
+      
     };
   }
 
@@ -78,9 +47,9 @@ class GetUserBike extends Component<Props, State> {
       .then((res) => res.json())
       .then((data) => {
         this.setState({
-          userbike: data.fetchedUserBike,
+          userbike: data.getUserBike,
         });
-        console.log("response", data);
+        console.log("response", data.getUserBike);
       });
   }
 
@@ -89,25 +58,42 @@ class GetUserBike extends Component<Props, State> {
     console.log('User Bikes' , this.state.userbike)
   }
 
-  handleExpandClick() {
-    this.setState({
-      expanded: !this.state.expanded,
-    });
-  }
+ 
 
   render() {
-    const { classes } = this.props;
+    
     return (
       <div>
-        <Container>
-        {this.state.userbike}
-        <GetUserBikeDisplay userBikes={this.state.userbike}/>
+        <li>
+        
+        <h1>can you see me?</h1>
+    <div>
 
-        </Container>
+        {this.state.userbike.map((bike: userBikeInterface, index: number) => {
+                return(
+                  
+                    <div key={index} >
+                        <h6>{bike.make}</h6>
+                        <h6>{bike.model}</h6>
+                        <h6>{bike.year}</h6>
+                        <h6>{bike.color}</h6>
+                        <h6>{bike.size}</h6>
+                        <h6>{bike.tireSize}</h6>
+                        <h6>{bike.userInput}</h6>
+                        
+                       
+                    </div>
+                )
+            })} 
+       
+       </div>
+
+       </li>  
       </div>
       
     );
   }
 }
 
-export default withStyles(styles)(GetUserBike);
+
+export default GetUserBike;

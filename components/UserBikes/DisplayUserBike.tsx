@@ -6,12 +6,13 @@ import CreateUserBike from './CreateUserBike';
 const useStyles = makeStyles(() =>
     createStyles({
         container: {
-            marginTop: '5em',
-            backgroundColor: 'gray',
+            marginTop: '4em',
+            backgroundColor: 'white',
             display: 'flex',
             justifyContent: 'center',
             alignContent: 'center',
-            height: '100%'
+            height: '50vh',
+            
         }
     }),
 );

@@ -31,26 +31,27 @@ const NavbBar = (props: Props) => {
             <Toolbar>
                 <Grid container spacing={3}>
                     <Grid item >
-                        <Link to='home'>Home</Link>
+                        {/* <Link to='home'>Home</Link> */}
+                        <Drawer/>
                     </Grid>
                     <Grid item xl={6}></Grid>
                     <Grid item xs className={classes.logSignButtons}>
-                        <Auth clearToken={props.clearToken} />
                         {/* <Signup updateToken={props.updateToken}/> */}
                         {/* <Login updateToken={props.updateToken} /> */}
                         {/* <Drawer /> */}
                         <Grid item xs>
-                        <Link to='/createbike'>Create Bike</Link>
+                        {/* <Link to='/createbike'>Create Bike</Link>
                         <Link to='/createapp'>Create App</Link>
                         <Link to='/getapp'>your appointments</Link>
                         <Link to='/getbike'>your bikes</Link>
                         <Link to='/deleteapp'>Delete Appointment</Link>
                         <Link to='/deleteuserbike'>Delete User Bike</Link>
                         <Link to='/updatebike'>Update User Bike</Link>
-                        <Link to='/updateapp'>Update Your Appointment</Link>
+                    <Link to='/updateapp'>Update Your Appointment</Link> */}
 
                     </Grid>
                     </Grid>
+                    <Auth clearToken={props.clearToken} />
                 </Grid>
             </Toolbar>
         </AppBar>

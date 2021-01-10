@@ -7,7 +7,7 @@ const useStyles = makeStyles(() =>
     createStyles({
         container: {
             marginTop: '5em',
-            backgroundColor: 'gray',
+            backgroundColor: 'white',
             display: 'flex',
             justifyContent: 'center',
             alignContent: 'center',
@@ -30,6 +30,7 @@ const GetAppointmentDisplay =(props: Props)=>{
         <Container className={classes.container}>
             <div>Your Scheduled Appointmnets</div>
             <GetAppointment  token={props.token} />
+            
         </Container>
     )
 }

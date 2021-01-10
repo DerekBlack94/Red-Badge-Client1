@@ -33,7 +33,7 @@ class CreateUserBike extends Component<Props, State> {
             
         };
     }
-    handleSubmit = (event: any) => {
+    handleSubmit = (event: MouseEvent<HTMLButtonElement | HTMLAnchorElement>) => {
         event.preventDefault();
         fetch('http://localhost:3000/userbike/create', {
             method: "POST",

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, MouseEvent } from 'react';
 import { TextField, Button } from '@material-ui/core';
 
 type LoginState = {
@@ -11,7 +11,7 @@ interface Props {
 }
 
 export default class LoginIndex extends Component<Props, LoginState>{
-    constructor(props: any){
+    constructor(props: Props){
         super(props)
         this.state ={
             email: '',
@@ -19,19 +19,19 @@ export default class LoginIndex extends Component<Props, LoginState>{
         }
     }
 
-    setUserName(e:any){
+    setUserName(e:string){
         this.setState({
             email: (e)
         })
     }
 
-    setPassword(e: any){
+    setPassword(e: string){
         this.setState({
             password: (e)
         })
     }
 
-    loginUser(e: any){
+    loginUser(e: MouseEvent<HTMLButtonElement | HTMLAnchorElement> ){
         e.preventDefault();
         fetch('http://localhost:3000/user/login', {
             method: 'POST',
@@ -51,11 +51,11 @@ export default class LoginIndex extends Component<Props, LoginState>{
     render() {
         return (
             <div>
-                <form onSubmit={(e)=>this.loginUser(e)} >
+                {/* <form onSubmit={(e)=>this.loginUser(e)} > */}
                     <TextField id="outlined-basic" label="email" variant="outlined" onChange={(e)=>this.setUserName(e.target.value)} />
                     <TextField id="outlined-basic" label="Password" variant="outlined" onChange={(e)=>this.setPassword(e.target.value)} />
-                    <Button type='submit' variant='contained'>LOG IN</Button>
-                </form>
+                    <Button onClick={(e)=>this.loginUser(e)} type='submit' variant='contained'>LOG IN</Button>
+                {/* </form> */}
             </div>
         )
     }

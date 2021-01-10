@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 
 type State = {
     
-    token: string | null ;
+    token: string| null ;
     userId: number;
     role: 'user' | 'admin';
     
@@ -12,7 +12,7 @@ type State = {
 
 
 class App extends Component<{}, State> {
-    constructor(props: any) {
+    constructor(props: {}) {
       super(props);
       this.state = {
         token: localStorage.getItem('token') ? localStorage.getItem('token') : "",

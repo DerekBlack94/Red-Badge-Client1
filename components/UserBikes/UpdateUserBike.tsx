@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, MouseEvent } from "react";
 import { TextField, Button } from "@material-ui/core";
 
 interface State  {
@@ -18,7 +18,7 @@ interface Props {
 }
 
 class UpdateUserBike extends Component<Props, State> {
-  constructor(props: any) {
+  constructor(props: Props) {
     super(props);
     this.state = {
             make: "",
@@ -34,7 +34,7 @@ class UpdateUserBike extends Component<Props, State> {
 
   
 
-  handleSubmit = (event: any) => {
+  handleSubmit = (event: MouseEvent<HTMLButtonElement | HTMLAnchorElement>) => {
     event.preventDefault();
     fetch('http://localhost:3000/userbike/1', {
         method: "PUT",
@@ -63,42 +63,42 @@ class UpdateUserBike extends Component<Props, State> {
     })
 }
 
-  setMake(e: any) {
+  setMake(e: string) {
     this.setState({
       make: e,
     });
   }
 
-  setModel(e: any) {
+  setModel(e: string) {
     this.setState({
       model: e,
     });
   }
 
-  setYear(e: any) {
+  setYear(e: string) {
     this.setState({
       year: e,
     });
   }
 
-  setColor(e: any) {
+  setColor(e: string) {
     this.setState({
       color: e,
     });
   }
 
-  setSize(e: any) {
+  setSize(e: string) {
     this.setState({
       size: e,
     });
   }
 
-  setTireSize(e: any) {
+  setTireSize(e: string) {
     this.setState({
       tireSize: e,
     });
   }
-  setUserInput(e: any) {
+  setUserInput(e: string) {
     this.setState({
       userInput: e,
     });

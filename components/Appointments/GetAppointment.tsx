@@ -3,11 +3,12 @@ import { Checkbox,Button } from "@material-ui/core";
 import{Typography} from "@material-ui/core";
 import GetAppointmentDisplay from "./GetAppointmentDisplay"
 import {Link} from 'react-router-dom';
+import { DataUsageTwoTone } from "@material-ui/icons";
 
 interface State  {
   // userBikeId: number;
-  appointments: any;
-  checked: boolean;
+  userAppointments: Array<appointmentInterface>;
+ 
 };
 
 interface Props {
@@ -15,15 +16,19 @@ interface Props {
   // bike: any;
 }
 // Array<{title: string, date: string, user: number, tags: Array<string>: null}>
+interface appointmentInterface {
+  savedDate: string,
+  userInput: string
+}
 
 
 class GetAppointment extends Component<Props, State> {
-  constructor(props: any) {
+  constructor(props: Props) {
     super(props);
     this.state = {
       // userBikeId: this.props.bike.id,
-      appointments: [],
-      checked: false,
+      userAppointments: [],
+      
     };
   }
 
@@ -38,42 +43,42 @@ class GetAppointment extends Component<Props, State> {
       .then((res) => res.json())
       .then((data) => {
         this.setState({
-          appointments: data.appointments,
+          userAppointments: data.GetAppointments,
         });
         console.log("Appointments: ", data);
       });
   }
 
-  handleCheck() {
-    this.setState({
-      checked: !this.state.checked,
-    });
-  }
+  
 
   componentDidMount() {
   
     this.appointment();
-    console.log('Appointments State: ', this.state.appointments)
+    console.log('Appointments State: ', this.state.userAppointments)
   }
 
   render() {
     return (
       <div>
           <li>
-          <Typography paragraph>{this.state.appointments}</Typography>
-          <h4>{this.state.appointments}</h4>
-          <h4>{GetAppointment}</h4>
-          {this.state.appointments}
-         
           
-          
+          <h1>can you see me ?</h1>
+          <div>
+            
+            {this.state.userAppointments.map((appointment: any, index: number) => {
+                return(
+                    <div key={index} >
+                        <h1>{appointment.savedDate}</h1>
+                        <h1>{appointment.userInput}</h1>
+                       
+                    </div>
+                )
+            })} 
+
+
+           
+        </div>
         
-         
-            {/* <Checkbox
-              checked={this.state.checked}
-              onChange={() => this.handleCheck()}
-              name="Check Me!"
-            /> */}
           </li>
       </div>
     );
