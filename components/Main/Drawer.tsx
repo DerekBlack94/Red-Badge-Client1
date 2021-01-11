@@ -18,6 +18,7 @@ import HomeSharpIcon from '@material-ui/icons/HomeSharp';
 import DirectionsBikeSharpIcon from '@material-ui/icons/DirectionsBikeSharp';
 import AddSharpIcon from '@material-ui/icons/AddSharp';
 import MenuSharpIcon from '@material-ui/icons/MenuSharp';
+import AccessTimeIcon from '@material-ui/icons/AccessTime';
 
 const styles = {
   list: {
@@ -80,14 +81,14 @@ class sideDrawer extends React.Component<Props,State> {
               <ListItemIcon><DirectionsBikeSharpIcon></DirectionsBikeSharpIcon></ListItemIcon>
               <Link to='/getbike'><Button>Your Bikes</Button></Link>
             </ListItem>
-            <ListItem>
+            {/* <ListItem>
               <ListItemIcon><DirectionsBikeSharpIcon></DirectionsBikeSharpIcon></ListItemIcon>
               <Link to='/deleteuserbike'><Button>Delete Your Bike</Button></Link>
             </ListItem>
             <ListItem>
               <ListItemIcon><DirectionsBikeSharpIcon></DirectionsBikeSharpIcon></ListItemIcon>
               <Link to='/updatebike'><Button>Update Your Bikes</Button></Link>
-            </ListItem>
+            </ListItem> */}
         </List>
         <Divider />
         <List>
@@ -97,17 +98,17 @@ class sideDrawer extends React.Component<Props,State> {
               <Link to='/createapp'><Button>Schduel Appointment</Button></Link>
             </ListItem>
             <ListItem >
-              <ListItemIcon><AddSharpIcon></AddSharpIcon></ListItemIcon>
+              <ListItemIcon><AccessTimeIcon></AccessTimeIcon></ListItemIcon>
               <Link to='/getapp'><Button>Your Appointments</Button></Link>
             </ListItem>
-            <ListItem >
+            {/* <ListItem >
               <ListItemIcon><AddSharpIcon></AddSharpIcon></ListItemIcon>
               <Link to='/updateapp'><Button>Change Your Appointment</Button></Link>
             </ListItem>
             <ListItem >
               <ListItemIcon><AddSharpIcon></AddSharpIcon></ListItemIcon>
               <Link to='/deleteapp'><Button>Delete Appointmnets</Button></Link>
-            </ListItem>
+            </ListItem> */}
         
         </List>
       </div>

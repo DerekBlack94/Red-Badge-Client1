@@ -6,7 +6,7 @@ import CreateAppointment from './CreateAppointment';
 const useStyles = makeStyles(() =>
     createStyles({
         container: {
-            marginTop: '5em',
+            marginTop: '3em',
             backgroundColor: 'white',
             display: 'flex',
             justifyContent: 'center',

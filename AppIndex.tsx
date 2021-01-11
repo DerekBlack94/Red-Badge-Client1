@@ -31,16 +31,17 @@ class App extends Component<{}, State> {
       }
     }
     
-    updateToken = (newToken: string, userId: number, role: 'user' | 'admin') => {
+    updateToken = (newToken: string, newUserId: number, newRole: 'user' | 'admin') => {
       localStorage.setItem("token", newToken);
-      localStorage.setItem('userId', String(userId));
-      localStorage.setItem('role', role);
+      localStorage.setItem('userId', String(newUserId));
+      localStorage.setItem('role', newRole);
       this.setState({
         token: newToken,
-        userId: userId,
-        role: role,
+        userId: newUserId,
+        role: newRole,
       })
       console.log(newToken)
+      console.log(newUserId)
     };
     
     clearToken = () => {

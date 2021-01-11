@@ -27,7 +27,7 @@ const UpdateAppointmentDisplay = (props: Props) => {
         <Container className={classes.container} >
             <div>
                 <h1>what would you like to update About Your Bike</h1>
-                <UpdateAppointment token={props.token} />
+                {/* <UpdateAppointment token={props.token} /> */}
             </div>
         </Container>
     )

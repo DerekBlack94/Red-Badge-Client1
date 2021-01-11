@@ -29,7 +29,7 @@ const DeleteAppointmentDisplay =(props: Props)=>{
     return(
         <Container className={classes.container}>
             <div>You deleted stuff!</div>
-            <DeleteAppointment  token={props.token} />
+            {/* <DeleteAppointment  token={props.token} /> */}
         </Container>
     )
 }

@@ -4,6 +4,7 @@ import { TextField, Button } from "@material-ui/core";
 
 interface Props {
     token: string | null;
+    appointmentId: number;
     // appointment:{
     //     savedDate: string;
     //     userInput: string;
@@ -15,7 +16,7 @@ interface Props {
 
 
 interface State {
-    appointment: any;
+    // appointment: any;
     // userbike:string;
 //         savedDate: string;
 //         userInput: string;
@@ -27,16 +28,17 @@ class DeleteAppointment extends Component<Props, State>{
     constructor(props: Props){
         super(props);
         this.state = {
-            appointment: null,
+            // appointment: null,
             // userbike: "0"
         }
+        this.deleteAppointment = this.deleteAppointment.bind(this)
     }
 
 
 
-deleteUserBike() {
+deleteAppointment() {
     // const AppId = this.state.appointment.id
-    fetch(`http://localhost:3000/appointments/1`, {
+    fetch(`http://localhost:3000/appointments/${this.props.appointmentId}`, {
       method: "DELETE",
       headers: new Headers({
         "Content-Type": "application/json",
@@ -53,15 +55,16 @@ deleteUserBike() {
   }
   
   componentDidMount() {
-    this.deleteUserBike();
-    console.log('User Bikes' , this.state.appointment)
+    // this.deleteAppointment();
+    console.log('User Appointments' , this.props.appointmentId)
   }
 
 render(){
     return(
         <div>
             <h1>can you see me?</h1>
-            <div>how about this?</div>
+            {/* <div>how about this?</div> */}
+            <Button variant='contained' onClick={this.deleteAppointment}>Delete</Button>
             
 
         </div>

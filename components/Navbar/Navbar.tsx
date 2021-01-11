@@ -11,9 +11,12 @@ import Login from '../Auth/LoginDisplay'
 
 const useStyles = makeStyles(() =>
     createStyles({
-        logSignButtons: {
+        Buttons: {
             display: 'flex',
-            justifyContent: 'flex-end'
+            justifyContent: 'flex-end',
+            // fontSize: "",
+            // color: 'green'
+
         },
     }),
 );
@@ -29,17 +32,18 @@ const NavbBar = (props: Props) => {
     return (
         <AppBar position='fixed'>
             <Toolbar>
-                <Grid container spacing={3}>
+                <Grid container spacing={5}>
                     <Grid item >
                         {/* <Link to='home'>Home</Link> */}
                         <Drawer/>
+                        {/* {this.props.token === "" ? <Drawer /> : null } */}
                     </Grid>
-                    <Grid item xl={6}></Grid>
-                    <Grid item xs className={classes.logSignButtons}>
+                    <Grid item xl={12}></Grid>
+                    <Grid item xs className={classes.Buttons}>
                         {/* <Signup updateToken={props.updateToken}/> */}
                         {/* <Login updateToken={props.updateToken} /> */}
                         {/* <Drawer /> */}
-                        <Grid item xs>
+                        <Grid item xl>
                         {/* <Link to='/createbike'>Create Bike</Link>
                         <Link to='/createapp'>Create App</Link>
                         <Link to='/getapp'>your appointments</Link>
@@ -48,10 +52,10 @@ const NavbBar = (props: Props) => {
                         <Link to='/deleteuserbike'>Delete User Bike</Link>
                         <Link to='/updatebike'>Update User Bike</Link>
                     <Link to='/updateapp'>Update Your Appointment</Link> */}
+                    <Auth clearToken={props.clearToken} />
 
                     </Grid>
                     </Grid>
-                    <Auth clearToken={props.clearToken} />
                 </Grid>
             </Toolbar>
         </AppBar>

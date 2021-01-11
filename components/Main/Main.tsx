@@ -26,7 +26,7 @@ import LoginDisplay from '../Auth/LoginDisplay';
 const useStyles = makeStyles(()=>
     createStyles({
         mainDiv: {
-            backgroundColor: 'grey',
+            backgroundColor: 'green',
         },
         
     })

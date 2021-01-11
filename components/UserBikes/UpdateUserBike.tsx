@@ -9,11 +9,12 @@ interface State  {
     size: string;
     tireSize: string;
     userInput: string;
-    id: number;
+    // id: number;
 };
 
 interface Props {
   token: string | null;
+  userBikeId: number;
   // bikeToUpdate: any;
 }
 
@@ -28,8 +29,9 @@ class UpdateUserBike extends Component<Props, State> {
             size: "",
             tireSize: "",
             userInput: "",
-            id: 0,
+            // id: 0,
     };
+    this.updateUserBike = this.updateUserBike.bind(this)
   }
 
   
@@ -61,6 +63,37 @@ class UpdateUserBike extends Component<Props, State> {
         
         console.log(this.props.token)
     })
+}
+
+updateUserBike() {
+  // const AppId = this.state.appointment.id
+  fetch(`http://localhost:3000/appointments/${this.props.userBikeId}`, {
+    method: "PUT",
+    headers: new Headers({
+      "Content-Type": "application/json",
+      Authorization: `${this.props.token}`,
+    }),
+    body: JSON.stringify({
+      userbike:{
+        make: this.state.make,
+        model: this.state.model,
+        year: this.state.year,
+        color: this.state.color,
+        size: this.state.size,
+        tireSize: this.state.tireSize,
+        userInput: this.state.userInput
+
+    },
+              })
+    
+  })
+    .then((res) => res.json())
+    .then((data) => {
+      // this.setState({
+      //   appointment: data.deleteUserBike,
+      // });
+      console.log("response", data);
+    });
 }
 
   setMake(e: string) {
@@ -162,7 +195,8 @@ class UpdateUserBike extends Component<Props, State> {
             value={this.state.userInput}
             onChange={(e) => this.setUserInput(e.target.value)}
           />
-          <Button onClick={(e)=>this.handleSubmit(e)} type='submit' variant="contained">Submit</Button>
+        
+          <Button variant='contained' onClick={this.updateUserBike}>Update</Button>
       </div>
     );
   }

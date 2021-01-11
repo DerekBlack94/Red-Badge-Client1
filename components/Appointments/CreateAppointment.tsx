@@ -1,5 +1,17 @@
 import React, { Component, MouseEvent } from "react";
 import { createStyles, withStyles } from "@material-ui/core/styles";
+import 'date-fns';
+
+import PropTypes from 'prop-types';
+import Grid from '@material-ui/core/Grid';
+
+import DateFnsUtils from '@date-io/date-fns';
+import {
+  MuiPickersUtilsProvider,
+  KeyboardTimePicker,
+  KeyboardDatePicker,
+} from '@material-ui/pickers';
+
 import {
   TextField,
   Button,
@@ -8,28 +20,27 @@ import {
   FormControl,
   Select,
 } from "@material-ui/core";
+import image from '../assets/Logo.png'
 
-// const styles = (theme: {}) =>
-//   createStyles({
-//     formControl: {
-//       margin: theme.spacing(1),
-//       minWidth: 120,
-//     },
-//     selectEmpty: {
-//       marginTop: theme.spacing(2),
-//     },
-//   });
+const styles = {
+  grid: {
+    width: '50%',
+  },
+};
+
+
 
 interface State {
  savedDate: string,
  userInput: string,
-  // userId: number
+ selectedDate: any
+ classes: string
+ 
 };
 
 interface Props {
   token: string | null;
-  // classes: any;
-  // bike: any
+  
 }
 
 class CreateAppointment extends Component<Props, State> {
@@ -38,7 +49,9 @@ class CreateAppointment extends Component<Props, State> {
     this.state = {
       savedDate: "",
       userInput: "",
-      // userId: this.props.id
+      selectedDate: new Date(),
+      classes: ""
+      
     };
   }
 
@@ -52,6 +65,17 @@ class CreateAppointment extends Component<Props, State> {
     this.setState({
       userInput: (e),
     });
+  }
+
+  handleDateChange = (date: any )  => {
+    this.setState({ selectedDate: date } );
+  };
+
+  setSelectedDate(e: any) {
+    this.setState({
+      selectedDate: (e)
+    });
+    console.log(Date)
   }
 
   
@@ -85,15 +109,55 @@ class CreateAppointment extends Component<Props, State> {
 
   render() {
     // const { classes } = this.props;
+    const { selectedDate } = this.state;
     return (
       <div>
-        {/* <form onSubmit={(e)=>this.createAppointment(e)}> */}
-          <TextField
+        <img src={image} width="250vw" height="250vh" />  
+        <MuiPickersUtilsProvider utils={DateFnsUtils}>
+      <Grid container justify="space-around">
+        {/* <KeyboardDatePicker
+          disableToolbar
+          variant="inline"
+          format="MM/dd/yyyy"
+          margin="normal"
+          id="date-picker-inline"
+          label="Date picker inline"
+          value={selectedDate}
+          onChange={this.handleDateChange}
+          KeyboardButtonProps={{
+            'aria-label': 'change date',
+          }}
+        /> */}
+        <KeyboardDatePicker
+          margin="normal"
+          id="date-picker-dialog"
+          label="Date picker dialog"
+          format="MM/dd/yyyy"
+          value={selectedDate}
+          onChange={this.handleDateChange}
+          KeyboardButtonProps={{
+            'aria-label': 'change date',
+          }}
+        />
+        <KeyboardTimePicker
+          margin="normal"
+          id="time-picker"
+          label="Time picker"
+          value={selectedDate}
+          onChange={this.handleDateChange}
+          KeyboardButtonProps={{
+            'aria-label': 'change time',
+          }}
+        />
+      </Grid>
+    </MuiPickersUtilsProvider>
+       
+           {/* <TextField
             id="outlined-basic"
             label="Appointment Time"
             variant="outlined"
             onChange={(e) => this.setDate(e.target.value)}
-          />
+          /> */}
           <TextField
             id="outlined-basic"
             label="Whats this all about? Life i mean"
@@ -101,8 +165,8 @@ class CreateAppointment extends Component<Props, State> {
             onChange={(e) => this.setUserInput(e.target.value)}
           />
          
-          <Button onClick={(e)=>this.createAppointment(e)} type='submit' variant='contained' >Schedule Appointment</Button>
-        {/* </form> */}
+          <Button onClick={(e)=>this.createAppointment(e)} type='submit' variant='contained' >Schedule Appointment</Button> 
+        
       </div>
     );
   }

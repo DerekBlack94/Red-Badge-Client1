@@ -26,7 +26,7 @@ const DeleteUserBikeDisplay = (props: Props) => {
     return (
         <Container className={classes.container} >
             <div>
-                <DeleteUserBike token={props.token}  />
+                {/* <DeleteUserBike token={props.token}  /> */}
             </div>
         </Container>
     )

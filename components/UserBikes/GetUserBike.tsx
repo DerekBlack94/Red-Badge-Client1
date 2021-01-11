@@ -4,6 +4,8 @@ import clsx from "clsx";
 import {Container,} from "@material-ui/core";
 import { ExpandMore } from "@material-ui/icons";
 import GetUserBikeDisplay from "./GetUserBikeDisplay";
+import DeleteUserBike from './DeleteUserBike'
+import UpdateUserBike from './UpdateUserBike'
 
 
 
@@ -50,6 +52,7 @@ class GetUserBike extends Component<Props, State> {
           userbike: data.getUserBike,
         });
         console.log("response", data.getUserBike);
+        console.log('test',this.state.userbike)
       });
   }
 
@@ -57,6 +60,9 @@ class GetUserBike extends Component<Props, State> {
     this.fetchedUserBike();
     console.log('User Bikes' , this.state.userbike)
   }
+//   const bottomTokenCheck = () => {
+//     return this.props.token === '' ? null : <DeleteUserBike userBikeId={bike.id} token={this.props.token} />
+// }
 
  
 
@@ -66,20 +72,24 @@ class GetUserBike extends Component<Props, State> {
       <div>
         <li>
         
-        <h1>can you see me?</h1>
+        
     <div>
 
         {this.state.userbike.map((bike: userBikeInterface, index: number) => {
                 return(
                   
                     <div key={index} >
-                        <h6>{bike.make}</h6>
-                        <h6>{bike.model}</h6>
-                        <h6>{bike.year}</h6>
-                        <h6>{bike.color}</h6>
-                        <h6>{bike.size}</h6>
-                        <h6>{bike.tireSize}</h6>
-                        <h6>{bike.userInput}</h6>
+                      <h2>Your {bike.make} {bike.model}</h2>
+                        <h3>Make:{bike.make}</h3>
+                        <h3>Model:{bike.model}</h3>
+                        <h3>Year:{bike.year}</h3>
+                        <h3>Color:{bike.color}</h3>
+                        <h3>Size:{bike.size}</h3>
+                        <h3>Tire Size:{bike.tireSize}</h3>
+                        <h3>Comments:{bike.userInput}</h3>
+                        {this.props.token === "" ? null : <DeleteUserBike userBikeId={bike.id} token={this.props.token}/> }
+                        {/* <DeleteUserBike userBikeId={bike.id} token={this.props.token}/> */}
+                        <UpdateUserBike userBikeId={bike.id} token={this.props.token}/>
                         
                        
                     </div>

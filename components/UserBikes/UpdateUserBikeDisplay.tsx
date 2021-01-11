@@ -27,7 +27,7 @@ const UpdateUserBikeDisplay = (props: Props) => {
         <Container className={classes.container} >
             <div>
                 <h1>what would you like to update About Your Bike</h1>
-                <UpdateUserBike token={props.token} />
+                {/* <UpdateUserBike token={props.token} /> */}
             </div>
         </Container>
     )
